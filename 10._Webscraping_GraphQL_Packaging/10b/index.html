@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stripe Int</title>
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        /* Style the form for better presentation */
+        form {
+            width: 300px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        input {
+            margin-bottom: 10px;
+        }
+        #error-message {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    
+    <form id="payment-form">
+        <!-- Cardholder's name -->
+        <label for="cardholder-name">Cardholder's Name</label>
+        <input type="text" id="cardholder-name" required>
+        <br>
+
+        <!-- Card Element -->
+        <label for="card-element">Card Details</label>
+        <div id="card-element"><!-- A Stripe Element will be inserted here. --></div>
+        <br>
+
+        <!-- Payment Button -->
+        <button id="submit-button">Pay</button>
+    </form>
+    <div id="error-message"></div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
