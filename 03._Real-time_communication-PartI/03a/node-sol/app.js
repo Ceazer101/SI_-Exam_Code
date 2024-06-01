@@ -1,15 +1,26 @@
 import express from 'express'
+import axios from 'axios'
 import { parseTxt, parseJson, parseYaml, parseCsv, parseXml } from '../../../1._Introduction/01a/node-sol/server.js';
 
 const app = express();
+const serverBurl = 'http://localhost:3000'
 
 app.get("/", (req, res) => {
-    res.send({message: "Parser API JavaScript."})
+    res.send({message: "Parser API JavaScript, server A."})
 });
 
 app.get("/txt", (req, res) => {
     const txtContent = parseTxt('../../../1._Introduction/01a/dataFiles/set1/users.txt');
-    res.send(txtContent);
+    res.json(txtContent);
+});
+
+app.get("/txtb", async (req, res) => {
+    try {
+        const response = await axios.get(`${serverBurl}/txt`);
+        res.send(response.data);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
 });
 
 app.get("/json", (req, res) => {
@@ -17,9 +28,27 @@ app.get("/json", (req, res) => {
     res.send(jsonContent);
 });
 
+app.get("/jsonb", async (req, res) => {
+    try {
+        const response = await axios.get(`${serverBurl}/json`);
+        res.send(response.data);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+});
+
 app.get("/yaml", (req, res) => {
     const yamlContent = parseYaml('../../../1._Introduction/01a/dataFiles/set1/users.yaml');
     res.send(yamlContent);
+});
+
+app.get("/yamlb", async (req, res) => {
+    try {
+        const response = await axios.get(`${serverBurl}/yaml`);
+        res.send(response.data);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
 });
 
 app.get("/csv", (req, res) => {
@@ -32,12 +61,30 @@ app.get("/csv", (req, res) => {
     }
 });
 
+app.get("/csvb", async (req, res) => {
+    try {
+        const response = await axios.get(`${serverBurl}/csv`);
+        res.send(response.data);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+});
+
 app.get("/xml", (req, res) => {
     try {
         parseXml('../../../1._Introduction/01a/dataFiles/set1/users.xml', (xmlContent) => {
             res.send(xmlContent);
         });
     } catch (error){
+        res.status(500).send(error.message);
+    }
+});
+
+app.get("/xmlb", async (req, res) => {
+    try {
+        const response = await axios.get(`${serverBurl}/xml`);
+        res.send(response.data);
+    } catch (error) {
         res.status(500).send(error.message);
     }
 });
