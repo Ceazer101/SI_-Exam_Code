@@ -1,9 +1,5 @@
 from fastapi import FastAPI
 import uvicorn
-#import sys
-#from _1._Introduction._01a.python_sol.server import parse_txt, parse_json, parse_yaml, parse_csv, parse_xml
-
-#sys.path.insert(1, '../../../1._Introduction/01a/python-sol/server.py')
 from server import parse_txt, parse_json, parse_yaml, parse_csv, parse_xml
 
 app = FastAPI()
