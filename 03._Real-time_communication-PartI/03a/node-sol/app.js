@@ -4,7 +4,7 @@ import { parseTxt, parseJson, parseYaml, parseCsv, parseXml } from '../../../1._
 const app = express();
 
 app.get("/", (req, res) => {
-    res.send({message: "Parser API"})
+    res.send({message: "Parser API JavaScript."})
 });
 
 app.get("/txt", (req, res) => {
