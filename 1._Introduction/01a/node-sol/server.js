@@ -57,11 +57,11 @@ console.log(yamlContent);
 const csvFile = "../dataFiles/set1/users.csv";
 parseCsv(csvFile, (csvContent) => {
     console.log("From CSV file");
-console.log(csvContent);
+    console.log(csvContent);
 });
 
 const xmlFile = "../dataFiles/set1/users.xml";
 parseXml(xmlFile, (xmlContent) => {
     console.log("From XML file");
-    console.log(JSON.stringify(xmlContent, null, 2));
+    console.log(JSON.stringify(xmlContent));
 });
