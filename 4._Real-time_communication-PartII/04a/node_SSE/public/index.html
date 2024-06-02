@@ -10,7 +10,7 @@
 
     <p>Status:</p>
     <div id="server-sent_status"></div>
-
+    
     <p>Time:</p>
     <div id="server-sent_time"></div>
 
@@ -18,10 +18,14 @@
         const serverSentStatusDiv = document.getElementById("server-sent_status");
         const serverSentTimeDiv = document.getElementById("server-sent_time");
         
-        const eventSource = new eventSource("/synchronize-time");
+        const eventSource = new EventSource("/synchronize-time");
 
         eventSource.addEventListener("message", (event) => {
-            serverSentTimeDiv.textContent = "Connected";
+            serverSentTimeDiv.textContent = event.data;
+        });
+
+        eventSource.addEventListener("open", (event) => {
+            serverSentStatusDiv.textContent = "Connected";
         });
 
         eventSource.addEventListener("error", (event) => {
@@ -33,6 +37,7 @@
                 serverSentStatusDiv.textContent = 'Error';
             }
         });
+        
     </script>
 </body>
 </html>
