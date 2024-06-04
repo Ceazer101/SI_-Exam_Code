@@ -1,8 +1,6 @@
 {
   "name": "auth0-express-webapp-sample",
-  "scripts": {
-    "docs": "jsdoc -c jsdoc.json"
-  },
+  "scripts": {},
   "dependencies": {
     "debug": "~3.2.7",
     "dotenv": "^6.1.0",
