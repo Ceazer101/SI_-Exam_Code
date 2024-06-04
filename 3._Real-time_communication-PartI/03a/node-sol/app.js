@@ -5,15 +5,53 @@ import { parseTxt, parseJson, parseYaml, parseCsv, parseXml } from '../../../1._
 const app = express();
 const serverBurl = 'http://localhost:3000'
 
+import swaggerJsDoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express';
+
+const swaggerOptions = {
+  swaggerDefinition: {
+    info: {
+      title: 'My API',
+      version: '1.0.0',
+      description: 'My API Documentation',
+    },
+    servers: ['http://localhost:5000'],
+  },
+  apis: ['*.js'],
+};
+
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
 app.get("/", (req, res) => {
     res.send({message: "Parser API JavaScript, server A."})
 });
 
+/**
+ * @swagger
+ * /txt:
+ *   get:
+ *     description: txt from server a
+ *     responses:
+ *       200:
+ *         description: Success
+ * 
+ */
 app.get("/txt", (req, res) => {
     const txtContent = parseTxt('../../../1._Introduction/01a/dataFiles/set1/users.txt');
     res.json(txtContent);
 });
 
+/**
+ * @swagger
+ * /txtb:
+ *   get:
+ *     description: txt from server b
+ *     responses:
+ *       200:
+ *         description: Success
+ * 
+ */
 app.get("/txtb", async (req, res) => {
     try {
         const response = await axios.get(`${serverBurl}/txt`);
