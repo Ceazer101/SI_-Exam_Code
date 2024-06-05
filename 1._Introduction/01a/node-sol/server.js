@@ -38,11 +38,3 @@ export function parseXml(filePath, callback) {
         callback(result);
     })
 }
-
-// module.exports = {
-//     parseTxt,
-//     parseJson,
-//     parseYaml,
-//     parseCsv,
-//     parseXml
-// };

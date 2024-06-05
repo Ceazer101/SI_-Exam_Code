@@ -6,6 +6,8 @@ import { buildSchema } from 'graphql';
 const schema = buildSchema(`
 type Query {
   hello: String
+  user(id: Int!): User
+  post(id: Int!): Post
 }
 type Mutation {
   setMessage(message: String): String
@@ -13,12 +15,30 @@ type Mutation {
 type Message {
   message: String
 }
+type User {
+  id: Int
+  name: String
+  email: String
+}
+type Post {
+  id: Int
+  title: String
+  content: String
+}
 `);
 
-// Define a variable to store the message
 let message = 'Hello, world!';
 
-// Define the resolvers
+let users = [
+  { id: 1, name: 'John Doe', email: 'john@example.com' },
+  { id: 2, name: 'Jane Doe', email: 'jane@example.com' },
+];
+
+let posts = [
+  { id: 1, title: 'Post 1', content: 'Content 1' },
+  { id: 2, title: 'Post 2', content: 'Content 2' },
+];
+
 const root = {
   hello: () => {
     return message;
@@ -27,9 +47,14 @@ const root = {
     message = newMessage;
     return message;
   },
+  user: ({ id }) => {
+    return users.find(user => user.id === id);
+  },
+  post: ({ id }) => {
+    return posts.find(post => post.id === id);
+  },
 };
 
-// Set up the server
 const app = express();
 app.use('/graphql', graphqlHTTP({
   schema: schema,
